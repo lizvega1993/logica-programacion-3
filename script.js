@@ -1,20 +1,28 @@
-function calcularFactorial() {
-let numero;
-do {
-    let input = prompt("Introduce un número para calcular su factorial:");
-    numero = parseFloat(input);
-    if (isNaN(numero)) {
-    alert("Por favor, introduce un número válido.");
+function fibonacci(n) {
+    let fibArray = [0, 1];
+    for (let i = 2; i < n; i++) {
+        fibArray.push(fibArray[i - 1] + fibArray[i - 2]);
     }
-} while (isNaN(numero));
-
-let factorial = 1;
-for (let i = 1; i <= numero; i++) {
-    factorial *= i;
+    return fibArray;
 }
 
-prompt( "El factorial de ${numero} es:", factorial);
-
+function validarNumero(input) {
+    return !isNaN(input) && isFinite(input) && input > 0 && Number.isInteger(input);
 }
 
-calcularFactorial();
+function obtenerNumero() {
+    let numero;
+    do {
+        numero = prompt("Ingrese un número entero positivo para generar la serie de Fibonacci:");
+        numero = parseInt(numero);
+    } while (!validarNumero(numero));
+    return numero;
+}
+
+function imprimirSerieFibonacci() {
+    let numero = obtenerNumero();
+    let serie = fibonacci(numero);
+    confirm("Serie de Fibonacci para " + numero + " números:"+ serie.join(", "));
+}
+
+imprimirSerieFibonacci();
